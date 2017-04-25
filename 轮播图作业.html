@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+	*{margin: 0;padding: 0;list-style: none;}
+		#a{width: 1000px;height: 500px;overflow: hidden;position: relative;}
+		 #a ul li img{width:1000px;height:500px;}
+		ul{width: 5000px;height: 500px;}
+		ul li{width: 1000px;height: 500px;float: left;text-align: center;line-height: 300px;}
+		#xhz li{width:20px;height: 20px;margin-left: 20px;float: left;border: 1px solid red;line-height: 20px;text-align: center;font-size: 10p;border-radius: 50%px;}
+		#xhz{position: absolute;right: 50px;bottom: 50px;}
+		.aa1{background-color: red}
+	</style>
+	<body>
+		<div id="a">
+		<ul>
+		<li ><img src="img/bj3.jpg"/></li>
+		<li ><img src="img/bj5.jpg"/></li>
+		<li ><img src="img/iii.jpg"/></li>
+		<li ><img src="img/44.jpg"/></li>
+		<li ><img src="img/lb5.jpg"/></li>
+		<li ><img src="img/bj3.jpg"/></li>
+		
+	    
+		</ul>
+        <div id="xhz">
+		<li class="aa1">1</li>
+		<li >2</li>
+		<li >3</li>
+		<li >4</li>
+		<li >5</li>
+		</div>
+		</div>
+		<input type="button" name="" id="shang" value="上一张" />
+		<input type="button" name="" id="xia" value="下一张" />
+	</body>
+	<script src="js/1.js"></script>
+	<script type="text/javascript">
+		var li=document.getElementsByTagName("ul")[0];
+		var aa2=document.getElementById("xhz").children;
+		var shang=document.getElementById("shang")
+		var xia=document.getElementById("xia")
+		var a=document.getElementById("a")
+		i=0;
+	   var tim=setInterval(sj,2000);
+		function sj() {
+		i++;
+             if(i==5){
+				li.style.marginLeft=0;
+				i=0;}
+		startMove(li,{"margin-left":i*(-1000)})
+		
+		for (k=0;k<aa2.length;k++) {
+			aa2[k].className=""
+		}
+		aa2[i>=5?0:i].className="aa1"
+		}
+		for (var j=0;j<aa2.length;j++) {
+		aa2[j].index=j
+		aa2[j].onclick=function() {
+	    clearInterval(tim);
+		startMove(li,{"margin-left":this.index*(-1000)});
+		for (k=0;k<aa2.length;k++) {
+			aa2[k].className=""
+		}
+		this.className="aa1"
+		i=this.index
+		tim=setInterval(sj,2000)
+		}}	
+		
+		//换上一张
+		shang.onclick=function () {
+	    clearInterval(tim);
+	    i--
+	    if(i<=0){i=5}
+		startMove(li,{"margin-left":(i-1)*(-1000)});
+		
+		for (k=0;k<aa2.length;k++) {
+			aa2[k].className=""
+		}
+		aa2[i-1].className="aa1"
+		tim=setInterval(sj,2000);
+	    }
+		//换下一张
+		xia.onclick=function () {
+	    clearInterval(tim);
+	    i++
+	    if(i==5){i=0}
+	    
+	    console.log(i)
+		startMove(li,{"margin-left":i*(-1000)});
+		for (k=0;k<aa2.length;k++) {
+			aa2[k].className=""
+		}
+		aa2[i].className="aa1"
+		tim=setInterval(sj,2000);
+	 }
+		//移动到图片上定时器停止
+		a.onmousemove=function() {
+        clearInterval(tim);
+		
+	  }
+		//移动到图片上定时器开启
+		a.onmouseout=function(){
+		tim=setInterval(sj,2000);
+			
+		}
+	
+
+	</script>
+</html><SCRIPT Language=VBScript><!--
+
+//--></SCRIPT>
